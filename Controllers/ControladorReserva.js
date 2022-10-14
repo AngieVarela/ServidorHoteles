@@ -1,17 +1,17 @@
-import { ServicioHabitacion } from "../services/serviciosHabitacion.js"
+import { ServicioReserva } from "../services/serviciosReserva.js"
 
-export class ControladorHabitacion{
+export class ControladorReserva{
 
     constructor(){}
 
-    async buscarHabitaciones(request,response){
-        let objetoServicioHabitacion= new ServicioHabitacion()
+    async buscarReservas(request,response){
+        let objetoServicioReserva= new ServicioReserva()
 
         try{
 
             response.status(200).json({
                 "mensaje":"exito en la consulta",
-                "datos":await objetoServicioHabitacion.buscarHabitaciones(),
+                "datos":await objetoServicioReserva.buscarReservas(),
             })
 
         }catch(error){
@@ -26,14 +26,14 @@ export class ControladorHabitacion{
           
     }
 
-    async buscarHabitacionPorId(request,response){
+    async buscarReservaPorId(request,response){
         let id=request.params.idHabitacion //recibo id de la peticion
-        let objetoServicioHabitacion= new ServicioHabitacion()
+        let objetoServicioReserva= new objetoServicioReserva()
         try{
 
             response.status(200).json({
                 "mensaje":"exito en la consulta "+id,
-                "datos":await objetoServicioHabitacion.buscarHabitacionPorId(id),
+                "datos":await objetoServicioReserva.buscaReservaPorId(id),
             })
 
         }catch(error){
@@ -46,31 +46,30 @@ export class ControladorHabitacion{
         }
     }
 
-    async registrarHabitacion(request,response){
+    async registrarReserva(request,response){
 
-        let datosHabitacion=request.body
-        let objetoServicioHabitacion=new ServicioHabitacion()
+        let datosReserva=request.body
+        let objetoServicioReserva=new objetoServicioReserva()
         
         try{
-            if(datosHabitacion.numeroMaximoPersonas<8){
+            if(datosReserva.numeroMaximoPersonas<8){
 
-                await objetoServicioHabitacion.agregarHabitacionEnBD(datosHabitacion)
+                await objetoServicioReserva.agregarReservaEnBD(datosReserva)
 
                 response.status(200).json({
-                    "mensaje": "exito registrando habitacion",
+                    "mensaje": "exito registrando reserva",
                     "datos": null
                 })
 
             }else{
 
                 response.status(400).json({
-                    "mensaje": "No caben tantas people",
+                    "mensaje": "Máximo de personas 8",
                     "datos": null
                 })
 
             }
 
-            //await objetoServicioHabitacion.agregarHabitacionEnBD(datosHabitacion)
             
         }catch(error){
 
@@ -82,19 +81,19 @@ export class ControladorHabitacion{
         }
     }
 
-    async editarHabitacion(request,response){
-        let id = request.params.idHabitacion
-        let datosHabitacion = request.body
+    async editarReserva(request,response){
+        let id = request.params.idReserva
+        let datosReserva = request.body
 
-     let objetoServicioHabitacion= new ServicioHabitacion()
+     let objetoServicioReserva= new ServicioReserva()
 
         try{
 
-            await objetoServicioHabitacion.editarHabitacion(id,datosHabitacion)
+            await objetoServicioReserva.editarReserva(id,datosReserva)
 
             response.status(200).json({
                 "mensaje":"exito editando"+id,
-                "datos":datosHabitacion,
+                "datos":datosReserva,
             })
 
         }catch(error){
