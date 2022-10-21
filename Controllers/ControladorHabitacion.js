@@ -57,25 +57,23 @@ export class ControladorHabitacion{
                 await objetoServicioHabitacion.agregarHabitacionEnBD(datosHabitacion)
 
                 response.status(200).json({
-                    "mensaje": "exito registrando habitacion",
+                    "mensaje": "Exito registrando habitacion",
                     "datos": null
                 })
 
             }else{
 
                 response.status(400).json({
-                    "mensaje": "No caben tantas people",
+                    "mensaje": "Sobrepaste el limite de personas",
                     "datos": null
                 })
 
             }
-
-            //await objetoServicioHabitacion.agregarHabitacionEnBD(datosHabitacion)
             
         }catch(error){
 
             response.status(400).json({
-                "mensaje":"error en la consulta "+error,
+                "mensaje":"error en el registro "+error,
                 "datos":null,
             })
 
@@ -100,7 +98,7 @@ export class ControladorHabitacion{
         }catch(error){
 
             response.status(400).json({
-                "mensaje":"error en la consulta "+error,
+                "mensaje":"error editando "+error,
                 "datos":null,
             })
 
